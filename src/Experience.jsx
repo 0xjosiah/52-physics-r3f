@@ -19,15 +19,17 @@ export default function Experience()
             <RigidBody
                 colliders='ball'
             >
-                <mesh castShadow position={ [ - 2, 2, 0 ] }>
+                <mesh castShadow position={ [ 0, 5, 0 ] }>
                     <sphereGeometry />
                     <meshStandardMaterial color="orange" />
                 </mesh>
             </RigidBody>
 
-            <RigidBody>
-                <mesh castShadow position={ [ 2, 2, 0 ] }>
-                    <boxGeometry />
+            <RigidBody
+                colliders='trimesh' // other option is hull ('convex hull' full name), creates encasing wrap around object, doesn't account for holes
+            >
+                <mesh castShadow position={ [ 0, 0, 0 ] } rotation-x={ Math.PI * .5 }>
+                    <torusGeometry />
                     <meshStandardMaterial color="mediumpurple" />
                 </mesh>
             </RigidBody>
