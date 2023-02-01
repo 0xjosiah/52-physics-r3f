@@ -1,5 +1,5 @@
 import { OrbitControls } from '@react-three/drei'
-import { Physics, RigidBody } from '@react-three/rapier'
+import { Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 
 export default function Experience()
@@ -14,6 +14,7 @@ export default function Experience()
         <ambientLight intensity={ 0.5 } />
 
         <Physics>
+            <Debug />
 
             <RigidBody>
                 <mesh castShadow position={ [ - 2, 2, 0 ] }>
@@ -29,7 +30,9 @@ export default function Experience()
                 </mesh>
             </RigidBody>
 
-            <RigidBody type='fixed'>
+            <RigidBody // can only be added as child in physics tag
+                type='fixed' // default is dynamic
+            >
                 <mesh receiveShadow position-y={ - 1.25 }>
                     <boxGeometry args={ [ 10, 0.5, 10 ] } />
                     <meshStandardMaterial color="greenyellow" />
