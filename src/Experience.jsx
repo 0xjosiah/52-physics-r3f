@@ -29,7 +29,7 @@ export default function Experience()
                 </mesh>
             </RigidBody>
 
-            <RigidBody type='fixes'>
+            <RigidBody type='fixed'>
                 <mesh receiveShadow position-y={ - 1.25 }>
                     <boxGeometry args={ [ 10, 0.5, 10 ] } />
                     <meshStandardMaterial color="greenyellow" />
