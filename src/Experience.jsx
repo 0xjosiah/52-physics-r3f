@@ -1,4 +1,4 @@
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, PivotControls } from '@react-three/drei'
 import { Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 
@@ -16,7 +16,9 @@ export default function Experience()
         <Physics>
             <Debug />
 
-            <RigidBody>
+            <RigidBody
+                colliders='ball'
+            >
                 <mesh castShadow position={ [ - 2, 2, 0 ] }>
                     <sphereGeometry />
                     <meshStandardMaterial color="orange" />
@@ -31,6 +33,7 @@ export default function Experience()
             </RigidBody>
 
             <RigidBody // can only be added as child in physics tag
+                // default rigid body is a cuboid
                 type='fixed' // default is dynamic
             >
                 <mesh receiveShadow position-y={ - 1.25 }>
