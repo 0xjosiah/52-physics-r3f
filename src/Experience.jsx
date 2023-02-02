@@ -35,6 +35,7 @@ export default function Experience()
                 colliders='ball'
                 gravityScale={ 1 }
                 restitution={ .5 } // this refers to bounciness, default is 0, when obj collide - rest is calc'd by taking avg rest of two colliding bodies, i.e. both bodies having a score of 1 is not realistic
+                friction={ 0 } // as with restitution, avg of values among all bodies involved
             >
                 <mesh castShadow position={ [ -1, 5, 0 ] }>
                     <sphereGeometry />
@@ -70,7 +71,8 @@ export default function Experience()
             <RigidBody
                 position={[ 2, 0, 0 ]}
                 ref={ cube }
-                restitution={ .6 }
+                // restitution={ .6 }
+                friction={ 0 }
             >
                 <mesh
                     castShadow
@@ -84,6 +86,7 @@ export default function Experience()
             <RigidBody // can only be added as child in physics tag
                 type='fixed' // default is dynamic
                 // restitution={ 1 }
+                friction={ 0 }
             >
                 <mesh receiveShadow position-y={ - 1.25 }>
                     <boxGeometry args={ [ 10, 0.5, 10 ] } />
