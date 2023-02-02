@@ -29,7 +29,9 @@ export default function Experience()
                 // default rigid body is a cuboid
                 // cuboid and ball are more performant than hull and trimesh, trimesh least perf
                 // avoid using trimesh with dynamic bodies (movable bodies), they are hollow by default and makes collision detection prone to bugs
-                colliders='trimesh' // other option is hull ('convex hull' full name), creates encasing wrap around object, doesn't account for holes
+                // other option is hull ('convex hull' full name), creates encasing wrap around object, doesn't account for holes
+                // setting colliders to false allows for custom collider
+                colliders={ false }
             >
                 <mesh castShadow position={ [ 0, 0, 0 ] } rotation-x={ Math.PI * .5 }>
                     <torusGeometry />
