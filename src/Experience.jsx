@@ -1,4 +1,5 @@
 import { OrbitControls, PivotControls } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 import { useRef } from 'react'
@@ -25,11 +26,15 @@ export default function Experience()
         <directionalLight castShadow position={ [ 1, 2, 3 ] } intensity={ 1.5 } />
         <ambientLight intensity={ 0.5 } />
 
-        <Physics>
+        <Physics
+            gravity={[ 0, -9.81, 0 ]} // y value (or down depending) of -9.81 is 'realistic'
+        >
             <Debug />
 
             <RigidBody
                 colliders='ball'
+                gravityScale={ 1 }
+                restitution={ .5 } // this refers to bounciness, default is 0, when obj collide - rest is calc'd by taking avg rest of two colliding bodies, i.e. both bodies having a score of 1 is not realistic
             >
                 <mesh castShadow position={ [ -1, 5, 0 ] }>
                     <sphereGeometry />
@@ -65,6 +70,7 @@ export default function Experience()
             <RigidBody
                 position={[ 2, 0, 0 ]}
                 ref={ cube }
+                restitution={ .6 }
             >
                 <mesh
                     castShadow
@@ -77,6 +83,7 @@ export default function Experience()
 
             <RigidBody // can only be added as child in physics tag
                 type='fixed' // default is dynamic
+                // restitution={ 1 }
             >
                 <mesh receiveShadow position-y={ - 1.25 }>
                     <boxGeometry args={ [ 10, 0.5, 10 ] } />
