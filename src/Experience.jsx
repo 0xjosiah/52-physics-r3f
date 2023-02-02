@@ -1,9 +1,11 @@
 import { OrbitControls, PivotControls } from '@react-three/drei'
 import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
+import { useRef } from 'react'
 
 export default function Experience()
 {
+    const cube = useRef(null)
     return <>
 
         <Perf position="top-left" />
@@ -19,7 +21,7 @@ export default function Experience()
             <RigidBody
                 colliders='ball'
             >
-                <mesh castShadow position={ [ 0, 5, 0 ] }>
+                <mesh castShadow position={ [ -1, 5, 0 ] }>
                     <sphereGeometry />
                     <meshStandardMaterial color="orange" />
                 </mesh>
@@ -52,6 +54,7 @@ export default function Experience()
 
             <RigidBody
                 position={[ 2, 0, 0 ]}
+                ref={ cube }
             >
                 <mesh castShadow >
                     <boxGeometry />
