@@ -25,7 +25,7 @@ export default function Experience()
                 </mesh>
             </RigidBody>
 
-            <RigidBody
+            {/* <RigidBody
                 // default rigid body is a cuboid
                 // cuboid and ball are more performant than hull and trimesh, trimesh least perf
                 // avoid using trimesh with dynamic bodies (movable bodies), they are hollow by default and makes collision detection prone to bugs
@@ -47,6 +47,15 @@ export default function Experience()
                 <mesh castShadow>
                     <torusGeometry />
                     <meshStandardMaterial color="mediumpurple" />
+                </mesh>
+            </RigidBody> */}
+
+            <RigidBody
+                position={[ 2, 0, 0 ]}
+            >
+                <mesh castShadow >
+                    <boxGeometry />
+                    <meshStandardMaterial color='mediumpurple' />
                 </mesh>
             </RigidBody>
 
