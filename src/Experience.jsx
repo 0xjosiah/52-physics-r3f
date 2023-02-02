@@ -1,5 +1,5 @@
 import { OrbitControls, PivotControls } from '@react-three/drei'
-import { CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
+import { BallCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 
 export default function Experience()
@@ -36,8 +36,13 @@ export default function Experience()
                 rotation-x={ Math.PI * .5 }
                 // scale not supported on rigid body
             >
-                <CuboidCollider
+                <BallCollider
                     args={[ 1.5, 1.5, .5 ]} // units are half extends, measure from center to edge
+                />
+                <BallCollider
+                    args={[ .25, 1, .25 ]}
+                    rotation={ [ - Math.PI * .5, 0, 0 ]}
+                    position={[ 2, 1, - 1 ]}
                 />
                 <mesh castShadow>
                     <torusGeometry />
