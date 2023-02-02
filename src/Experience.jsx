@@ -2,12 +2,13 @@ import { OrbitControls, PivotControls } from '@react-three/drei'
 import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 import { useRef } from 'react'
+import * as THREE from 'three'
 
 export default function Experience()
 {
     const cube = useRef(null)
     const cubeClick = (event) => {
-        console.log(event.target)
+        cube.current.applyImpulse({ x: 0, y: 5, z: 0 })
     }
 
     return <>
