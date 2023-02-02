@@ -6,6 +6,10 @@ import { useRef } from 'react'
 export default function Experience()
 {
     const cube = useRef(null)
+    const cubeClick = (event) => {
+        console.log(event.target)
+    }
+
     return <>
 
         <Perf position="top-left" />
@@ -56,7 +60,10 @@ export default function Experience()
                 position={[ 2, 0, 0 ]}
                 ref={ cube }
             >
-                <mesh castShadow >
+                <mesh
+                    castShadow
+                    onClick={ cubeClick } // pointer events must be on mesh not rigidbody
+                >
                     <boxGeometry />
                     <meshStandardMaterial color='mediumpurple' />
                 </mesh>
