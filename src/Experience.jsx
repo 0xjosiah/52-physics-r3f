@@ -8,7 +8,8 @@ export default function Experience()
 {
     const cube = useRef(null)
     const cubeClick = (event) => {
-        cube.current.applyImpulse({ x: 0, y: 5, z: 0 })
+        cube.current.applyImpulse({ x: 0, y: 5, z: 0 }) // similar to addForce but force is sustained like wind, impluse is more of a jump
+        cube.current.applyTorqueImpulse({ x: Math.PI * .5, y: Math.PI * .25, z: 0 })
     }
 
     return <>
