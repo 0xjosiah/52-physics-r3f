@@ -1,5 +1,5 @@
 import { OrbitControls, PivotControls } from '@react-three/drei'
-import { Debug, Physics, RigidBody } from '@react-three/rapier'
+import { CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 
 export default function Experience()
@@ -32,8 +32,14 @@ export default function Experience()
                 // other option is hull ('convex hull' full name), creates encasing wrap around object, doesn't account for holes
                 // setting colliders to false allows for custom collider
                 colliders={ false }
+                position={ [ 0, 0, 0 ] }
+                rotation-x={ Math.PI * .5 }
+                // scale not supported on rigid body
             >
-                <mesh castShadow position={ [ 0, 0, 0 ] } rotation-x={ Math.PI * .5 }>
+                <CuboidCollider
+                    args={[ 1.5, 1.5, .5 ]} // units are half extends, measure from center to edge
+                />
+                <mesh castShadow>
                     <torusGeometry />
                     <meshStandardMaterial color="mediumpurple" />
                 </mesh>
