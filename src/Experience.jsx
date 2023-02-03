@@ -35,7 +35,10 @@ export default function Experience()
                 colliders='ball'
                 gravityScale={ 1 }
                 restitution={ .5 } // this refers to bounciness, default is 0, when obj collide - rest is calc'd by taking avg rest of two colliding bodies, i.e. both bodies having a score of 1 is not realistic
-                friction={ 0 } // as with restitution, avg of values among all bodies involved
+                friction={ 0.7 } // as with restitution, avg of values among all bodies involved
+                // mass auto calc'd based on shape and volume, if multiple bodies - calc'd as sum of bodies, i.e. bigger obj - bigger mass
+                // mass does not effect fall speed
+                // to adjust mass, need to create custom colliders
             >
                 <mesh castShadow position={ [ -1, 5, 0 ] }>
                     <sphereGeometry />
@@ -72,8 +75,12 @@ export default function Experience()
                 position={[ 2, 0, 0 ]}
                 ref={ cube }
                 // restitution={ .6 }
-                friction={ 0 }
+                friction={ 0.7 }
+                colliders={ false }
             >
+                <CuboidCollider
+                    args={[ .5, .5, .5 ]}
+                />
                 <mesh
                     castShadow
                     onClick={ cubeClick } // pointer events must be on mesh not rigidbody
@@ -86,7 +93,7 @@ export default function Experience()
             <RigidBody // can only be added as child in physics tag
                 type='fixed' // default is dynamic
                 // restitution={ 1 }
-                friction={ 0 }
+                friction={ 0.7 }
             >
                 <mesh receiveShadow position-y={ - 1.25 }>
                     <boxGeometry args={ [ 10, 0.5, 10 ] } />
