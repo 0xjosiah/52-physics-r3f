@@ -23,7 +23,9 @@ export default function Experience()
     useFrame((state) => {
         const time = state.clock.getElapsedTime()
         const eulerRotation = new THREE.Euler(0, time, 0)
-        twister.current.setNextKinematicRotation()
+        const quaternionRotation = new THREE.Quaternion()
+        quaternionRotation.setFromEuler(eulerRotation)
+        twister.current.setNextKinematicRotation(quaternionRotation)
     })
 
     return <>
