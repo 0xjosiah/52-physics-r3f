@@ -9,7 +9,10 @@ export default function Experience()
 {
     const cube = useRef(null)
     const cubeClick = (event) => {
-        cube.current.applyImpulse({ x: 0, y: 5, z: 0 }) // similar to addForce but force is sustained like wind, impluse is more of a jump
+        const mass = cube.current.mass()
+        console.log(mass);
+
+        cube.current.applyImpulse({ x: 0, y: 5 * mass, z: 0 }) // similar to addForce but force is sustained like wind, impluse is more of a jump
         cube.current.applyTorqueImpulse({
             x: Math.random() - .5,
             y: Math.random() - .5,
@@ -80,6 +83,7 @@ export default function Experience()
             >
                 <CuboidCollider
                     args={[ .5, .5, .5 ]}
+                    mass={ 3 }
                 />
                 <mesh
                     castShadow
