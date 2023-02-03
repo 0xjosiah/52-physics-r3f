@@ -10,7 +10,6 @@ export default function Experience()
     const cube = useRef(null)
     const cubeClick = (event) => {
         const mass = cube.current.mass()
-        console.log(mass);
 
         cube.current.applyImpulse({ x: 0, y: 5 * mass, z: 0 }) // similar to addForce but force is sustained like wind, impluse is more of a jump
         cube.current.applyTorqueImpulse({
@@ -19,6 +18,13 @@ export default function Experience()
             z: Math.random() - .5,
         })
     }
+
+    const twister = useRef(null)
+    useFrame((state) => {
+        const time = state.clock.getElapsedTime()
+        const eulerRotation = new THREE.Euler(0, time, 0)
+        twister.current.setNextKinematicRotation()
+    })
 
     return <>
 
@@ -76,6 +82,9 @@ export default function Experience()
 
             <RigidBody
                 position={[ 2, 0, 0 ]}
+                // do not apply position or rotation to body at run time - creates bugs, if needs moving - apply forces or impulses
+                // if movement is required, some resetting will be required or use a kinematic type (instead of fixed or dynamic)
+                // kinematic often used for player controlled obj
                 ref={ cube }
                 // restitution={ .6 }
                 friction={ 0.7 }
@@ -102,6 +111,19 @@ export default function Experience()
                 <mesh receiveShadow position-y={ - 1.25 }>
                     <boxGeometry args={ [ 10, 0.5, 10 ] } />
                     <meshStandardMaterial color="greenyellow" />
+                </mesh>
+            </RigidBody>
+
+            <RigidBody
+                position={[ 0, -0.8, 0 ]}
+                friction={ 0 }
+                type='kinematicPosition' 
+                // kinematic types can only be moved manually, not by other bodies
+                ref={ twister }
+            >
+                <mesh castShadow scale={[ .4, .4, 3 ]} >
+                    <boxGeometry />
+                    <meshStandardMaterial color='salmon' />
                 </mesh>
             </RigidBody>
 
