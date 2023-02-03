@@ -25,7 +25,17 @@ export default function Experience()
         const eulerRotation = new THREE.Euler(0, time, 0)
         const quaternionRotation = new THREE.Quaternion()
         quaternionRotation.setFromEuler(eulerRotation)
+        // this method only takes quaternion, thus the above conversion
         twister.current.setNextKinematicRotation(quaternionRotation)
+
+        const angle = time * .5
+        const x = Math.cos(angle) * 2
+        const z = Math.sin(angle) * 2
+        twister.current.setNextKinematicTranslation({
+            x,
+            y: -.8, // this is result of matching pos for body init below
+            z
+        })
     })
 
     return <>
