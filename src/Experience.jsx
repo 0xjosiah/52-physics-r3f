@@ -2,11 +2,13 @@ import { OrbitControls, PivotControls } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import * as THREE from 'three'
 
 export default function Experience()
 {
+    const [ hitSound ] = useState(() => new Audio('./hit.mp3'))
+
     const cube = useRef(null)
     const cubeClick = (event) => {
         const mass = cube.current.mass()
