@@ -38,6 +38,10 @@ export default function Experience()
         })
     })
 
+    const collisionEnter = () => {
+        console.log('collision!');
+    }
+
     return <>
 
         <Perf position="top-left" />
@@ -101,6 +105,7 @@ export default function Experience()
                 // restitution={ .6 }
                 friction={ 0.7 }
                 colliders={ false }
+                onCollisionEnter={ collisionEnter }
             >
                 <CuboidCollider
                     args={[ .5, .5, .5 ]}
