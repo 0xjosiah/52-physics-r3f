@@ -111,6 +111,7 @@ export default function Experience()
                 friction={ 0.7 }
                 colliders={ false }
                 onCollisionEnter={ collisionEnter }
+                onCollisionExit={() => console.log('exit')}
             >
                 <CuboidCollider
                     args={[ .5, .5, .5 ]}
