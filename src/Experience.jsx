@@ -1,6 +1,6 @@
 import { OrbitControls, PivotControls, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
+import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, CylinderCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 import { useRef, useState } from 'react'
 import * as THREE from 'three'
@@ -154,7 +154,8 @@ export default function Experience()
                 </mesh>
             </RigidBody>
 
-            <RigidBody>
+            <RigidBody position={[ 0, 4, 0 ]} colliders={ false }>
+                <CylinderCollider args={[ .5, 1.25 ]}/>
                 <primitive object={ scene } scale={ .25 } />
             </RigidBody>
 
