@@ -49,16 +49,22 @@ export default function Experience()
         // hitSound.play()
     }
 
-    const cubesCount = 3
+    const cubesCount = 100
     const { positions, rotations, scales } = useMemo(() => {
         const positions = []
         const rotations = []
         const scales = []
 
         for(let i = 0; i < cubesCount; i++) {
-            positions.push([ i * 2, 0, 0 ])
-            rotations.push([ 0, 0, 0 ])
-            scales.push([ 1, 1, 1 ])
+            positions.push([
+                (Math.random() - .5) * 8,
+                6 + i * .2,
+                (Math.random() - .5) * 8
+            ])
+            rotations.push([ Math.random(), Math.random(), Math.random() ])
+
+            const scale = .2 + Math.random() * .8
+            scales.push([ scale, scale, scale ])
         }
 
         return { positions, rotations, scales }
@@ -88,7 +94,7 @@ export default function Experience()
         <Physics
             gravity={[ 0, -9.81, 0 ]} // y value (or down depending) of -9.81 is 'realistic'
         >
-            <Debug />
+            {/* <Debug /> */}
 
             <RigidBody
                 colliders='ball'
@@ -198,7 +204,7 @@ export default function Experience()
             <InstancedRigidBodies
                 positions={ positions }
                 rotations={ rotations }
-                scale={ scales }
+                scales={ scales }
             >
                 <instancedMesh ref={ cubes } args={[ null, null, cubesCount ]} receiveShadow castShadow>
                     <boxGeometry />
