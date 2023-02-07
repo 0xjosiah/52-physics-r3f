@@ -1,6 +1,6 @@
 import { OrbitControls, PivotControls, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, CylinderCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
+import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, CylinderCollider, Debug, InstancedRigidBodies, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
@@ -54,6 +54,11 @@ export default function Experience()
     useEffect(() => {
         for(let i = 0; i < cubesCount; i++){
             const matrix = new THREE.Matrix4()
+            matrix.compose(
+                new THREE.Vector3(i * 2, 0, 0), // position
+                new THREE.Quaternion(), // rotation
+                new THREE.Vector3(1, 1, 1) // scale
+            )
             cubes.current.setMatrixAt(i, matrix)
         }
     }, [])
@@ -176,10 +181,14 @@ export default function Experience()
                 <CuboidCollider args={[ .5, 2, 5 ]} position={[ -5.5, 1, 0 ]} />
             </RigidBody>
 
-            <instancedMesh ref={ cubes } args={[ null, null, cubesCount ]}>
-                <boxGeometry />
-                <meshStandardMaterial color='tomato' />
-            </instancedMesh>
+            {/* these are far more performant than multiple reg meshes */}
+            <InstancedRigidBodies>
+                <instancedMesh ref={ cubes } args={[ null, null, cubesCount ]} receiveShadow castShadow>
+                    <boxGeometry />
+                    <meshStandardMaterial color='tomato' />
+                </instancedMesh>
+
+            </InstancedRigidBodies>
 
 
         </Physics>
