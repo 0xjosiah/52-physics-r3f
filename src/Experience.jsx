@@ -1,4 +1,4 @@
-import { OrbitControls, PivotControls } from '@react-three/drei'
+import { OrbitControls, PivotControls, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
@@ -9,6 +9,8 @@ export default function Experience()
 {
     // slick way to load sound only once for component
     const [ hitSound ] = useState(() => new Audio('./hit.mp3'))
+
+    const { scene } = useGLTF('./hamburger.glb' )
 
     const cube = useRef(null)
     const cubeClick = (event) => {
@@ -150,6 +152,10 @@ export default function Experience()
                     <boxGeometry />
                     <meshStandardMaterial color='salmon' />
                 </mesh>
+            </RigidBody>
+
+            <RigidBody>
+                <primitive object={ scene } scale={ .25 } />
             </RigidBody>
 
 
