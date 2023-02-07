@@ -2,7 +2,7 @@ import { OrbitControls, PivotControls, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BallCollider, CapsuleCollider, ConeCollider, CuboidCollider, CylinderCollider, Debug, Physics, RigidBody } from '@react-three/rapier'
 import { Perf } from 'r3f-perf'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 export default function Experience()
@@ -48,6 +48,15 @@ export default function Experience()
         // hitSound.volume = Math.random()
         // hitSound.play()
     }
+
+    const cubesCount = 3
+    const cubes = useRef(null)
+    useEffect(() => {
+        for(let i = 0; i < cubesCount; i++){
+            const matrix = new THREE.Matrix4()
+            cubes.current.setMatrixAt(i, matrix)
+        }
+    }, [])
 
     return <>
 
@@ -166,6 +175,11 @@ export default function Experience()
                 <CuboidCollider args={[ .5, 2, 5 ]} position={[ 5.5, 1, 0 ]} />
                 <CuboidCollider args={[ .5, 2, 5 ]} position={[ -5.5, 1, 0 ]} />
             </RigidBody>
+
+            <instancedMesh ref={ cubes } args={[ null, null, cubesCount ]}>
+                <boxGeometry />
+                <meshStandardMaterial color='tomato' />
+            </instancedMesh>
 
 
         </Physics>
